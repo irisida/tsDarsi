@@ -3,13 +3,13 @@ type Callback = () => void;
 export class Eventing {
     events: { [key: string]: Callback[] } = {};
 
-    on(eventName: string, callback: Callback): void {
+    on = (eventName: string, callback: Callback): void => {
         const handlers = this.events[eventName] || [];
         handlers.push(callback);
         this.events[eventName] = handlers;
-    }
+    };
 
-    trigger(eventName: string): void {
+    trigger = (eventName: string): void => {
         /**
          * handlers may be an array, or may be undefined.
          * if the handlers are undefined or have a zero length we should return early
@@ -25,5 +25,5 @@ export class Eventing {
         handlers.forEach((callback) => {
             callback();
         });
-    }
+    };
 }
